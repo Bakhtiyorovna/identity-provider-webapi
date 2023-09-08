@@ -8,13 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="BCrypt" Version="1.0.0" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="MailKit" Version="4.2.0" />
+    <PackageReference Include="Microsoft.AspNet.Authentication.OAuth" Version="1.0.0-rc1-final" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.0-preview.7.23375.6" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.0.0-preview5" />
+    <PackageReference Include="MimeKit" Version="4.2.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.0-preview5" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.Authentication.OAuth" Version="1.0.0-rc1-final" />
+    <ProjectReference Include="..\Idenitity-Provider.Persistence\Idenitity-Provider.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

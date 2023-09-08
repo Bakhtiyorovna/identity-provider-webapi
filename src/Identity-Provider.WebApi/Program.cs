@@ -1,4 +1,7 @@
 
+using Identity_Provider.WebApi.Configurations.Layers;
+using Identity_Provider.WebApi.Middlewares;
+
 namespace Identity_Provider.WebApi
 {
     public class Program
@@ -14,6 +17,9 @@ namespace Identity_Provider.WebApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.ConfigureDataAccess();
+            builder.ConfigureServiceLayer();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -25,8 +31,15 @@ namespace Identity_Provider.WebApi
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseCors("AllowAll");
 
+            app.UseStaticFiles();
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.MapControllers();
 
