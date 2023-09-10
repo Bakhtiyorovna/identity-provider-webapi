@@ -5,5 +5,5 @@ namespace Identity_Provider.Service.Interfaces.Auth;
 
 public interface ITokenService
 {
-    public string GenereateToken(UserViewModel user);
+    public string GenereateToken(User user);
 }

@@ -17,7 +17,7 @@ public class TokenService: ITokenService
     {
         _config = configuration.GetSection("Jwt");
     }
-    public string GenereateToken(UserViewModel user)
+    public string GenereateToken(User user)
     {
         var identityClaims = new Claim[]
         {

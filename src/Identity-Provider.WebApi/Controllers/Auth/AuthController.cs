@@ -33,7 +33,6 @@ namespace Identity_Provider.WebApi.Controllers.Auth
             }
             else
                 return BadRequest(resltvalid.Errors);
-
         }
 
         [HttpPost("register/send-code")]
@@ -49,7 +48,6 @@ namespace Identity_Provider.WebApi.Controllers.Auth
             }
             else
                 return BadRequest("Email invalid");
-
         }
 
         [HttpPost("register/verify")]
@@ -59,6 +57,7 @@ namespace Identity_Provider.WebApi.Controllers.Auth
             var res = IdentityProviderValidator.IsValid(dto.IdentityProvider);
             if (res == false) return BadRequest("Email is invalid!");
             var srResult = await _authService.VerifyRegisterAsync(dto.IdentityProvider, dto.code);
+            
             return Ok(new { srResult.Result, srResult.Token });
         }
 
@@ -74,38 +73,5 @@ namespace Identity_Provider.WebApi.Controllers.Auth
 
             return Ok(new { serviceResult.Result, serviceResult.Token });
         }
-
-        //[HttpPost("password/reset")]
-        //public async Task<IActionResult> ResetPassword([FromBody] ForgotPassword forgot)
-        //{
-        //    var res = PhoneNumberValidator.IsValid(forgot.PhoneNumber);
-        //    var password = PasswordValidator.IsStrongPassword(forgot.NewPassword);
-        //    if (res == false)
-        //        return BadRequest("Phone number is invalid!");
-        //    else if (password.IsValid == false)
-        //        return BadRequest(password.Message);
-
-        //    var serviceResult = await _authService.ResetPasswordAsync(forgot);
-
-        //    return Ok(new { serviceResult.Result, serviceResult.CachedMinutes });
-        //}
-
-        //[HttpPost("password/verify")]
-        //public async Task<IActionResult> PasswordVerifyAsync([FromBody] VerfyUserDto verfyUser)
-        //{
-        //    var res = PhoneNumberValidator.IsValid(verfyUser.PhoneNumber);
-        //    if (res == false) return BadRequest("Phone number is invalid!");
-        //    var srResult = await _authService.VerifyResetPasswordAsync(verfyUser.PhoneNumber, verfyUser.Code);
-
-        //    return Ok(new { srResult.Result, srResult.Token });
-        //}
-
-        //[HttpPost("token/verify")]
-        //public async Task<IActionResult> CheckToken([FromBody] AuthorizationDto token)
-        //{
-        //    var requedt = await _authService.CheckTokenAsync(token);
-
-        //    return Ok(requedt);
-        //}
     }
 }

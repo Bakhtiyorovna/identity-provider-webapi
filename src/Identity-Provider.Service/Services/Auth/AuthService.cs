@@ -11,6 +11,7 @@ using Identity_Provider.Service.Interfaces.Auth;
 using Identity_Provider.Service.Interfaces.Notifications;
 using Identity_Provider.Service.Security;
 using Microsoft.Extensions.Caching.Memory;
+using System.Numerics;
 
 namespace Identity_Provider.Service.Services.Auth;
 
@@ -97,8 +98,14 @@ public class AuthService : IAuthService
                 else if (verificationDto.Code == code)
                 {
                     var dbResult = await RegisterToDatabaseAsync(registerDto);
-
-                    return (Result: dbResult, Token: "");
+                    // if (dbResult is true)
+                    if (dbResult==1)
+                    {
+                        var user = await _userRepository.GetByEmailAsync(email);
+                        string token = _tokenService.GenereateToken(user);
+                        return (Result: 1, Token: token);
+                    }
+                    else return (Result: 0, Token: "");
                 }
                 else
                 {
@@ -117,21 +124,20 @@ public class AuthService : IAuthService
 
     private async Task<int> RegisterToDatabaseAsync(RegisterDto registerDto)
     {
-        User user = new User();
-        var hasher = PasswordHasher.Hash(registerDto.Password);
-        user.PasswordHash = hasher.Hash;
-        user.Salt = hasher.Salt;
+        var user = new User();
+        user.FirstName = registerDto.FirstName;
+        user.LastName = registerDto.LastName;
+        user.IdentityProvider = registerDto.IdentityProvider;
+        user.Confirm = true;
 
-        var config = new MapperConfiguration(cnfg =>
-        {
-            cnfg.CreateMap<RegisterDto, User>();
-        });
+        var hasherResult = PasswordHasher.Hash(registerDto.Password);
+        user.PasswordHash = hasherResult.Hash;
+        user.Salt = hasherResult.Salt;
 
-        var FirsMapping = new Mapper(config);
+        user.CreatedAt = user.UpdatedAt = TimeHelper.GetDateTime();
 
         var dbResult = await _userRepository.CreateAsync(user);
-
-        return dbResult;
+        return dbResult ;
     }
 
     public async Task<(bool Result, string Token)> LoginAsyn(LoginDto dto)
@@ -142,7 +148,7 @@ public class AuthService : IAuthService
         var hasherResult = PasswordHasher.Verify(dto.Password, user.Salt, user.PasswordHash);
         if (hasherResult == false) throw new PasswordNotMatchException();
 
-        UserViewModel userViewModel = new UserViewModel()
+        User userViewModel = new User()
         {
             Id = user.Id,
             FirstName = user.FirstName,
@@ -153,7 +159,7 @@ public class AuthService : IAuthService
             UpdatedAt = user.UpdatedAt,
         };
 
-        string token = _tokenService.GenereateToken(userViewModel);
+        string token = _tokenService.GenereateToken(user);
 
         return (Result: true, Token: token);
     }

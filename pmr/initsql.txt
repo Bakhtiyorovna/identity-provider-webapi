@@ -1,14 +1,15 @@
 CREATE TABLE IF NOT EXISTS public.users
 (
     id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
-    first_name text COLLATE pg_catalog."default",
-    last_name text COLLATE pg_catalog."default",
-    identity_provider text COLLATE pg_catalog."default" NOT NULL,
-    provider_key text COLLATE pg_catalog."default" NOT NULL,
-    password_hash text COLLATE pg_catalog."default" NOT NULL,
-    salt text COLLATE pg_catalog."default" NOT NULL,
-    description text COLLATE pg_catalog."default" NOT NULL,
-    confirm boolean NOT NULL,
+    first_name text ,
+    last_name text ,
+    identity_provider text ,
+    provider_key text,
+    clein_id BIGINT,
+    password_hash text,
+    salt text ,
+    description text,
+    confirm boolean,
     created_at timestamp without time zone DEFAULT now(),
     updated_at timestamp without time zone DEFAULT now(),
     CONSTRAINT users_pkey PRIMARY KEY (id)
