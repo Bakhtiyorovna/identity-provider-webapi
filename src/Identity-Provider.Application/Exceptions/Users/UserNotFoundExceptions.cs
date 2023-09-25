@@ -1,6 +1,6 @@
 ﻿namespace Identity_Provider.Application.Exceptions.Users;
 
-public class UserNotFoundExceptions:NotFoundException
+public class UserNotFoundExceptions : NotFoundException
 {
     public UserNotFoundExceptions()
     {

@@ -1,5 +1,4 @@
 ﻿using Npgsql;
-using Dapper;
 namespace Identity_Provider.DataAccess.Repositories;
 
 public class BaseRepository

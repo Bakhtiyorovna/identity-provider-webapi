@@ -1,12 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Idenitity_Provider.Persistence.Dtos.Notifications;
+using Identity_Provider.Service.Interfaces.Notifications;
+using Microsoft.Extensions.Configuration;
 using MimeKit;
 using MimeKit.Text;
-using Idenitity_Provider.Persistence.Dtos.Notifications;
-using Identity_Provider.Service.Interfaces.Notifications;
 
 namespace Identity_Provider.Service.Services.Notifications;
 
-public class EmailSender:IEmailSender
+public class EmailSender : IEmailSender
 {
     private readonly string SENDER = string.Empty;
     private readonly string PLATFORM = string.Empty;

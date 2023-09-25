@@ -1,8 +1,6 @@
-﻿using Microsoft.Win32.SafeHandles;
+﻿namespace Identity_Provider.Application.Exceptions.Users;
 
-namespace Identity_Provider.Application.Exceptions.Users;
-
-public class UserAlreadyExsistExceptions:AlreadyExsistException
+public class UserAlreadyExsistExceptions : AlreadyExsistException
 {
     public UserAlreadyExsistExceptions()
     {

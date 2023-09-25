@@ -1,16 +1,15 @@
 ﻿using Identity_Provider.Domain.Entities.Users;
 using Identity_Provider.Service.Common.Helpers;
+using Identity_Provider.Service.Interfaces.Auth;
 using Microsoft.Extensions.Configuration;
-using System.Security.Claims;
-using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using Identity_Provider.Service.Interfaces.Auth;
-using Identity_Provider.DataAccess.ViewModels.Users;
+using System.Security.Claims;
+using System.Text;
 
 namespace Identity_Provider.Service.Services.Auth;
 
-public class TokenService: ITokenService
+public class TokenService : ITokenService
 {
     private readonly IConfiguration _config;
     public TokenService(IConfiguration configuration)

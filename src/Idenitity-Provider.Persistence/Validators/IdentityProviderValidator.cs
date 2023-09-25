@@ -1,6 +1,4 @@
-﻿using NpgsqlTypes;
-
-namespace Idenitity_Provider.Persistence.Validators;
+﻿namespace Idenitity_Provider.Persistence.Validators;
 
 public class IdentityProviderValidator
 {

@@ -1,6 +1,6 @@
 ﻿namespace Identity_Provider.Domain.Entities.Users;
 
-public class User:Auditable
+public class User : Auditable
 {
     public string FirstName { get; set; } = String.Empty;
     public string LastName { get; set; } = String.Empty;

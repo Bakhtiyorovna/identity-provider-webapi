@@ -3,7 +3,7 @@ using Idenitity_Provider.Persistence.Dtos.Auth;
 
 namespace Idenitity_Provider.Persistence.Validators.Auth;
 
-public class UserRegisterValidator: AbstractValidator<RegisterDto>
+public class UserRegisterValidator : AbstractValidator<RegisterDto>
 
 {
     public UserRegisterValidator()

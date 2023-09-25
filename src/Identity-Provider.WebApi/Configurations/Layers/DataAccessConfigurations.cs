@@ -7,7 +7,7 @@ namespace Identity_Provider.WebApi.Configurations.Layers
     {
         public static void ConfigureDataAccess(this WebApplicationBuilder builder)
         {
-            builder.Services.AddScoped<IUserRepository,UserRepositoy>();
+            builder.Services.AddScoped<IUserRepository, UserRepositoy>();
         }
     }
 }

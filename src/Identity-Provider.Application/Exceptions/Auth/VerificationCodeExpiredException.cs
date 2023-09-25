@@ -1,7 +1,7 @@
 ﻿
 namespace Identity_Provider.Application.Exceptions.Auth;
 
-public class VerificationCodeExpiredException:ExpiredException
+public class VerificationCodeExpiredException : ExpiredException
 {
     public VerificationCodeExpiredException()
     {

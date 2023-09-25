@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using Identity_Provider.DataAccess.Interfaces.Users;
-using Identity_Provider.DataAccess.ViewModels.Users;
 using Identity_Provider.Domain.Entities.Users;
 
 namespace Identity_Provider.DataAccess.Repositories.Users;

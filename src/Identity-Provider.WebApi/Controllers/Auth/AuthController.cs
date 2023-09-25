@@ -3,9 +3,8 @@ using Idenitity_Provider.Persistence.Validators;
 using Idenitity_Provider.Persistence.Validators.Auth;
 using Identity_Provider.Service.Interfaces.Auth;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Identity_Provider.WebApi.Controllers.Auth
 {
@@ -18,6 +17,18 @@ namespace Identity_Provider.WebApi.Controllers.Auth
         {
             _authService = authService;
         }
+
+
+        [HttpGet("profile")]
+        public IActionResult GetProfile()
+        {
+            var userId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userName = HttpContext.User.Identity.Name;
+            // Return user information or perform actions based on the user's identity.
+
+            return Ok(new { UserId = userId, UserName = userName });
+        }
+
 
         [HttpPost("register")]
         [AllowAnonymous]
@@ -57,7 +68,7 @@ namespace Identity_Provider.WebApi.Controllers.Auth
             var res = IdentityProviderValidator.IsValid(dto.IdentityProvider);
             if (res == false) return BadRequest("Email is invalid!");
             var srResult = await _authService.VerifyRegisterAsync(dto.IdentityProvider, dto.code);
-            
+
             return Ok(new { srResult.Result, srResult.Token });
         }
 

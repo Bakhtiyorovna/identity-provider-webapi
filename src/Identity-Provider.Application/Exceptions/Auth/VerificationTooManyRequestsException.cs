@@ -1,7 +1,7 @@
 ﻿
 namespace Identity_Provider.Application.Exceptions.Auth
 {
-    public class VerificationTooManyRequestsException:TooManyRequestsException
+    public class VerificationTooManyRequestsException : TooManyRequestsException
     {
         public VerificationTooManyRequestsException()
         {

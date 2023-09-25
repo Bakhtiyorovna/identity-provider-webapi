@@ -1,17 +1,14 @@
-﻿using AutoMapper;
-using Idenitity_Provider.Persistence.Dtos.Auth;
+﻿using Idenitity_Provider.Persistence.Dtos.Auth;
 using Idenitity_Provider.Persistence.Dtos.Notifications;
 using Identity_Provider.Application.Exceptions.Auth;
 using Identity_Provider.Application.Exceptions.Users;
 using Identity_Provider.DataAccess.Interfaces.Users;
-using Identity_Provider.DataAccess.ViewModels.Users;
 using Identity_Provider.Domain.Entities.Users;
 using Identity_Provider.Service.Common.Helpers;
 using Identity_Provider.Service.Interfaces.Auth;
 using Identity_Provider.Service.Interfaces.Notifications;
 using Identity_Provider.Service.Security;
 using Microsoft.Extensions.Caching.Memory;
-using System.Numerics;
 
 namespace Identity_Provider.Service.Services.Auth;
 
@@ -40,7 +37,7 @@ public class AuthService : IAuthService
     public async Task<(bool Result, int CachedMinutes)> RegisterAsync(RegisterDto dto)
     {
         var user = await _userRepository.GetByEmailAsync(dto.IdentityProvider);
-        if (user is not null )
+        if (user is not null)
             throw new UserAlreadyExsistExceptions();
 
         if (_memoryCache.TryGetValue(REGISTER_CACHE_KEY + dto.IdentityProvider, out RegisterDto registrDto))
@@ -99,7 +96,7 @@ public class AuthService : IAuthService
                 {
                     var dbResult = await RegisterToDatabaseAsync(registerDto);
                     // if (dbResult is true)
-                    if (dbResult==1)
+                    if (dbResult == 1)
                     {
                         var user = await _userRepository.GetByEmailAsync(email);
                         string token = _tokenService.GenereateToken(user);
@@ -137,7 +134,7 @@ public class AuthService : IAuthService
         user.CreatedAt = user.UpdatedAt = TimeHelper.GetDateTime();
 
         var dbResult = await _userRepository.CreateAsync(user);
-        return dbResult ;
+        return dbResult;
     }
 
     public async Task<(bool Result, string Token)> LoginAsyn(LoginDto dto)
@@ -153,8 +150,8 @@ public class AuthService : IAuthService
             Id = user.Id,
             FirstName = user.FirstName,
             LastName = user.LastName,
-            IdentityProvider=user.IdentityProvider,
-            Confirm=user.Confirm,
+            IdentityProvider = user.IdentityProvider,
+            Confirm = user.Confirm,
             CreatedAt = user.CreatedAt,
             UpdatedAt = user.UpdatedAt,
         };

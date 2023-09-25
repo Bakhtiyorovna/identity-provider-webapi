@@ -2,7 +2,7 @@
 
 namespace Identity_Provider.Application.Exceptions;
 
-public class ExpiredException:Exception
+public class ExpiredException : Exception
 {
     public HttpStatusCode StatusCode { get; } = HttpStatusCode.Gone;
 

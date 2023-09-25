@@ -1,7 +1,7 @@
 ﻿
 namespace Identity_Provider.Application.Exceptions.Users;
 
-public class UserExpiredException: ExpiredException
+public class UserExpiredException : ExpiredException
 {
     public UserExpiredException()
     {
